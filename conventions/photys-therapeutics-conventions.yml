@@ -1,0 +1,55 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.photys.com/_api/mcp
+note: >-
+  Photys publishes no HTTP API and no OpenAPI, so the cross-cutting semantics below describe
+  the single machine-readable surface it does serve — the Wix Site MCP endpoint. Fields that
+  a REST contract would answer are recorded as na (no such surface) rather than left blank.
+auth_style: anonymous JSON-RPC; a visitor token minted anonymously by GenerateVisitorToken gates the two write-capable tools
+transport: HTTP POST, JSON-RPC 2.0, Accept 'application/json, text/event-stream'
+versioning:
+  scheme: MCP protocolVersion negotiation
+  current: '2025-06-18'
+  source: initialize response
+  note: no URL/path/header versioning exists because no HTTP API is published
+idempotency:
+  supported: unknown
+  note: >-
+    Not documented anywhere Photys publishes, and not declared in any tool inputSchema. No
+    Idempotency pointer is emitted in apis.yml — asserting one would be a claim the provider
+    has not made.
+pagination:
+  supported: na
+  note: no paginated collection endpoint is published
+error_envelope:
+  format: JSON-RPC 2.0 error object
+  note: observed shape only; no error reference is published
+rate_limit_signal:
+  headers: []
+  note: none observed on the anonymous probes; see rate-limits/photys-therapeutics-rate-limits.yml
+request_id_tracing:
+  supported: na
+  note: JSON-RPC id echoes the caller's own id; no server-issued request/trace id is returned
+reversibility:
+  state: undocumented
+  grade: null
+  write_surface: true
+  note: >-
+    A write surface exists — ExecuteWixAPI is annotated readOnlyHint:false, destructiveHint:true
+    and takes a hasMutations flag, and CallWixSiteAPI can start a purchase or book a service on
+    a visitor's behalf. Photys and the platform publish NO reversal operation, NO cancel/refund/
+    undo tool, and NO window inside which an action can be taken back. Recorded as undocumented
+    (not na, because writes are possible; not documented, because no reversal path is stated).
+    No window is asserted here because none is published anywhere we could reach.
+  evidence:
+  - source: mcp/photys-therapeutics-mcp-tools.json
+    detail: 'ExecuteWixAPI annotations {readOnlyHint:false, destructiveHint:true, openWorldHint:false}'
+  - source: https://www.photys.com/llms.txt
+    detail: '"Start a purchase and be directed to the site to complete checkout" — no reversal documented'
+dry_run_mode:
+  supported: false
+  note: no dry-run/simulate parameter appears in any tool inputSchema
+cross_links:
+  authentication: authentication/photys-therapeutics-authentication.yml
+  rate_limits: rate-limits/photys-therapeutics-rate-limits.yml
+  mcp: mcp/photys-therapeutics-mcp.yml

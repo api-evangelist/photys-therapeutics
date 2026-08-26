@@ -1,0 +1,35 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.photys.com/
+note: >-
+  Every /.well-known/* path on the company's only production host returned HTTP 400 with the
+  Wix error shell — the site is a Wix-hosted corporate site and the platform does not route
+  dot-prefixed paths. NOT ONE PATH RETURNED A DOCUMENT, so no WellKnown or SecurityTxt
+  pointer is emitted in apis.yml; this file records the absence, it does not assert a surface.
+hosts:
+- host: www.photys.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 400
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 400
+    file: null
+  - path: /.well-known/api-catalog
+    status: 400
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 400
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 400
+    file: null
+  - path: /.well-known/agent.json
+    status: 400
+    file: null

@@ -1,0 +1,17 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.photys.com/
+plan_count: 0
+note: >-
+  Photys Therapeutics is a preclinical/Phase-I biopharmaceutical company and sells no software,
+  API, or subscription product. Its site (a six-section single-page Wix site: Platforms,
+  Pipeline, Our Team, Investors, News, Contact) carries no pricing page, no plans, and no
+  commercial signup of any kind. This is an honest zero, not an unread pricing page.
+evidence:
+- url: https://www.photys.com/
+  status: 200
+  detail: no pricing or plans section in the nav, body, or footer
+- url: https://www.photys.com/pages-sitemap.xml
+  status: 200
+  detail: sitemap lists exactly 6 URLs — the homepage and five dated press releases; no pricing page exists
+plans: []

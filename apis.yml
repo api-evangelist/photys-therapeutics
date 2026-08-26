@@ -1,23 +1,85 @@
 aid: photys-therapeutics
 name: Photys Therapeutics
-description: 'Photys Therapeutics is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Photys Therapeutics is a clinical-stage biopharmaceutical company in Waltham, Massachusetts
+  advancing proximity-based, targeted protein modulation medicines across three heterobifunctional
+  modalities: PROTAC-based protein degradation (lead program PHT-776/HPB-143, an oral IRAK4
+  degrader that entered Phase I in August 2026 for autoimmune and inflammatory disease), PHICS
+  (Phosphorylation-Inducing Chimeric Small molecules, partnered with Novo Nordisk since December
+  2024 for cardiometabolic disease), and tPRIME for restoring protective proteins such as p53
+  Y220C in oncology. Founded in 2022 out of Amit Choudhary's lab at the Broad Institute and
+  Brigham and Women's Hospital with a $75M Series A led by MPM Capital and Longwood Fund. Photys
+  operates no developer program and publishes no OpenAPI, GraphQL, AsyncAPI, WSDL or gRPC
+  contract; its only machine-readable, agent-facing surface is the platform-provided Wix Site MCP
+  endpoint served from its own host at www.photys.com/_api/mcp, which answers anonymously with
+  nine tools over site content and business details.
 url: https://raw.githubusercontent.com/api-evangelist/photys-therapeutics/refs/heads/main/apis.yml
+image: https://static.wixstatic.com/ficons/2079da_8b1665acced14f96aa889139336df6ad%7Emv2.ico
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Biotechnology
+- Pharmaceuticals
+- Drug Discovery
+- Life Sciences
+- Clinical Trials
+- Oncology
+- Protein Degradation
+- MCP
+apis:
+- aid: photys-therapeutics:photys-site-mcp
+  name: Photys Site MCP
+  description: >-
+    The Wix-platform Site MCP server Photys serves from its own production host. Nine tools
+    over public site content — business details, in-site search, site API docs discovery, an
+    anonymous visitor-token minter, and generic Wix REST/JS call tools. Anonymous, JSON-RPC 2.0,
+    MCP protocolVersion 2025-06-18. This is a site-assistant surface, not a product API.
+  humanURL: https://www.photys.com/llms.txt
+  baseURL: https://www.photys.com/_api/mcp
+  tags:
+  - MCP
+  - Site Content
+  properties:
+  - type: MCPServer
+    url: mcp/photys-therapeutics-mcp.yml
+  - type: LLMsTxt
+    url: llms/photys-therapeutics-llms.txt
+  - type: Authentication
+    url: authentication/photys-therapeutics-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/photys-therapeutics-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/photys-therapeutics_stock/
+  url: https://www.photys.com/
+- type: GitHubOrganization
+  url: https://github.com/photys
+- type: MCPServer
+  url: mcp/photys-therapeutics-mcp.yml
+- type: LLMsTxt
+  url: llms/photys-therapeutics-llms.txt
+- type: Authentication
+  url: authentication/photys-therapeutics-authentication.yml
+- type: Conformance
+  url: conformance/photys-therapeutics-conformance.yml
+- type: Conventions
+  url: conventions/photys-therapeutics-conventions.yml
+- type: Plans
+  url: plans/photys-therapeutics-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/photys-therapeutics-rate-limits.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

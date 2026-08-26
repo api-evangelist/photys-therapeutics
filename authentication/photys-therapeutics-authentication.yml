@@ -1,0 +1,44 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.photys.com/_api/mcp
+note: >-
+  Derived from live probes of the only machine-readable surface Photys serves (the Wix Site
+  MCP endpoint) plus the company's own published llms.txt. There is no OpenAPI document, so
+  there are no securitySchemes to read; nothing below is inferred from a spec.
+surfaces:
+- name: Photys Site MCP
+  url: https://www.photys.com/_api/mcp
+  schemes:
+  - type: none
+    applies_to:
+    - initialize
+    - tools/list
+    - GetBusinessDetails
+    - SearchInSite
+    - SearchSiteApiDocs
+    - GenerateVisitorToken
+    - ReadFullDocsArticle
+    - ReadFullDocsMethodSchema
+    - BrowseWixRESTDocsMenu
+    evidence: >-
+      Anonymous POST with no Authorization header returned HTTP 200 for initialize and
+      tools/list on 2026-08-26.
+  - type: bearer
+    name: visitorToken
+    issued_by: GenerateVisitorToken (MCP tool, anonymous — no credential required to mint one)
+    applies_to:
+    - CallWixSiteAPI
+    - ExecuteWixAPI
+    evidence: >-
+      Both tools declare visitorToken in their required inputSchema properties; the published
+      llms.txt states "Must be called before making any CallWixSiteAPI request if no visitor
+      token is already available in context" and "No authentication required to connect to
+      the MCP endpoint".
+oauth: false
+api_keys: false
+mutual_tls: false
+openid_connect: false
+summary: >-
+  Fully anonymous. No account, key, or OAuth flow exists — the session token that gates the
+  two write-capable tools is minted on demand by an unauthenticated tool call, and the server
+  exposes only public site content.

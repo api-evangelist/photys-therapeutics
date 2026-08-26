@@ -1,0 +1,48 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.photys.com/_api/mcp
+note: >-
+  Photys publishes no OpenAPI, GraphQL SDL, AsyncAPI, WSDL or .proto. The only machine-readable
+  interface is the Wix-platform Site MCP endpoint served on the company's own host, so the
+  conformance assertions below are limited to what that endpoint demonstrably speaks. Nothing
+  here is inferred from marketing copy.
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  version: '2025-06-18'
+  evidence: >-
+    POST initialize to https://www.photys.com/_api/mcp returned HTTP 200 with
+    protocolVersion "2025-06-18", capabilities {tools:{listChanged:true},logging:{}} and a
+    serverInfo block; POST tools/list returned 9 tools each carrying a draft-07 inputSchema.
+- id: jsonrpc-2.0
+  name: JSON-RPC 2.0
+  conforms: true
+  evidence: MCP responses carry "jsonrpc":"2.0" and echo the request id.
+- id: json-schema-draft-07
+  name: JSON Schema draft-07
+  conforms: true
+  evidence: >-
+    Every tool inputSchema in mcp/photys-therapeutics-mcp-tools.json declares
+    $schema http://json-schema.org/draft-07/schema#.
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: https://www.photys.com/llms.txt returned HTTP 200 with a real llms.txt document (3,399 bytes).
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    /.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource both
+    returned 400; the MCP endpoint answered anonymously with no OAuth challenge.
+- id: rfc9457
+  name: 'RFC 9457 Problem Details'
+  conforms: false
+  evidence: No HTTP API is published, so there is no error envelope to assess.
+domain_standard:
+  applicable: false
+  note: >-
+    Photys is a preclinical/Phase-I biopharmaceutical company. Its market's data standards
+    (CDISC SDTM/ADaM, HL7 FHIR, CDASH, SPL) apply to sponsors publishing clinical or
+    regulatory data interfaces. Photys publishes no such interface, and the reward-only
+    domain_standard_conformance check is therefore left unclaimed rather than invented.

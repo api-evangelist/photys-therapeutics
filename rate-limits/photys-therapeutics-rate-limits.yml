@@ -1,0 +1,17 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.photys.com/_api/mcp
+limit_count: 0
+note: >-
+  No published rate limits. Photys documents no API program, and the Wix Site MCP endpoint
+  returned no rate-limit headers on the anonymous initialize and tools/list probes. Recorded
+  as an honest zero — the absence of a runtime signal is the finding.
+observed_headers: []
+evidence:
+- url: https://www.photys.com/_api/mcp
+  status: 200
+  detail: 'POST tools/list — response carried no X-RateLimit-*, RateLimit-*, or Retry-After header'
+- url: https://www.photys.com/llms.txt
+  status: 200
+  detail: the provider's own llms.txt documents the MCP tool set and states no limits
+limits: []
