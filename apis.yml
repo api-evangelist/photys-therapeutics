@@ -14,6 +14,17 @@ description: >-
   endpoint served from its own host at www.photys.com/_api/mcp, which answers anonymously with
   nine tools over site content and business details.
 url: https://raw.githubusercontent.com/api-evangelist/photys-therapeutics/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://static.wixstatic.com/ficons/2079da_8b1665acced14f96aa889139336df6ad%7Emv2.ico
 x-type: company
 x-source: harvest:secondary-market
