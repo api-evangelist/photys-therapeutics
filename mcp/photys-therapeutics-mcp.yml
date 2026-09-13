@@ -13,27 +13,29 @@ server:
   documentation: https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp
 ownership:
   verdict: belongs-to-provider
-  note: >-
-    The endpoint is served from www.photys.com, the company's own production host, and the
-    server identifies itself in its initialize response as 'Site Visitor Assistant for site
-    "Photys" (https://www.photys.com/_api/mcp)'. The server software is Wix's standard Site
-    MCP — Photys runs its corporate site on Wix — so the tool set is platform-generic while
-    the data it serves is Photys' own public site content. Recorded as a real, provider-hosted
-    agent surface, NOT as a first-party API product built by Photys.
+  note: The endpoint is served from www.photys.com, the company's own production host, and the server
+    identifies itself in its initialize response as 'Site Visitor Assistant for site "Photys" (https://www.photys.com/_api/mcp)'.
+    The server software is Wix's standard Site MCP — Photys runs its corporate site on Wix — so the tool
+    set is platform-generic while the data it serves is Photys' own public site content. Recorded as a
+    real, provider-hosted agent surface, NOT as a first-party API product built by Photys.
 deployment:
   mode: remote
   endpoint: https://www.photys.com/_api/mcp
   auth: none
   verified: probed
-  note: >-
-    Anonymous JSON-RPC 2.0 POST returned HTTP 200 for both initialize and tools/list on
-    2026-08-26. CallWixSiteAPI and ExecuteWixAPI additionally require a visitor token that
-    GenerateVisitorToken mints anonymously.
+  note: Anonymous JSON-RPC 2.0 POST returned HTTP 200 for both initialize and tools/list on 2026-08-26.
+    CallWixSiteAPI and ExecuteWixAPI additionally require a visitor token that GenerateVisitorToken mints
+    anonymously.
+  probe_prior: (never probed)
+  probe: live
+  probe_why: live
+  checked: '2026-09-11'
+  source: claimed-backlog re-probe 2026-09-11
 x-evidence:
   fetched: '2026-08-26'
   initialize:
     url: https://www.photys.com/_api/mcp
-    method: 'POST {"jsonrpc":"2.0","id":1,"method":"initialize",...}'
+    method: POST {"jsonrpc":"2.0","id":1,"method":"initialize",...}
     http_status: 200
     server_info: Site Visitor Assistant for site "Photys" (https://www.photys.com/_api/mcp)
     protocol_version: '2025-06-18'
@@ -42,7 +44,7 @@ x-evidence:
     - logging
   tools_list:
     url: https://www.photys.com/_api/mcp
-    method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+    method: POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}
     http_status: 200
     file: mcp/photys-therapeutics-mcp-tools.json
 tool_count: 9
@@ -101,13 +103,10 @@ tools:
   - reason
   read_only: true
 notes:
-- >-
-  Full JSON Schema inputSchema for every tool is preserved verbatim in
-  mcp/photys-therapeutics-mcp-tools.json — this manifest is a summary, not the contract.
-- >-
-  Four of the nine tools carry MCP annotations (ReadFullDocsArticle, ReadFullDocsMethodSchema,
-  BrowseWixRESTDocsMenu, ExecuteWixAPI); the other five return no annotations block, so
-  read_only is recorded as null rather than guessed.
-- >-
-  No tool crosswalk is emitted: Photys publishes no OpenAPI and no GraphQL surface, so there
-  is nothing to bind the MCP tools back to.
+- Full JSON Schema inputSchema for every tool is preserved verbatim in mcp/photys-therapeutics-mcp-tools.json
+  — this manifest is a summary, not the contract.
+- Four of the nine tools carry MCP annotations (ReadFullDocsArticle, ReadFullDocsMethodSchema, BrowseWixRESTDocsMenu,
+  ExecuteWixAPI); the other five return no annotations block, so read_only is recorded as null rather
+  than guessed.
+- 'No tool crosswalk is emitted: Photys publishes no OpenAPI and no GraphQL surface, so there is nothing
+  to bind the MCP tools back to.'
