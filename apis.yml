@@ -77,6 +77,9 @@ apis:
     url: llms/photys-therapeutics-llms.txt
   - type: Authentication
     url: authentication/photys-therapeutics-authentication.yml
+  x-surface: platform-generated
+  x-platform: wix
+  x-platform-surface: site-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
